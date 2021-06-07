@@ -14,6 +14,7 @@
            "signatureStaging": false,
            "minimumAccuracyForAutoAddedSignatures": "low"
     },
+    "policy-builder": { "learningMode": "disabled" },
     "signature-sets": [
             {
                 "name": "SQL Injection Signatures",
