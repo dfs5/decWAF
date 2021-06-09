@@ -27,7 +27,14 @@
             		{
             		"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/openapi3-arcadia.yaml"
             		}
-	    	]
+	    ],
+		"whitelist-ips": [
+			{
+				"ipAddress": "10.24.0.4",
+				"ipMask": "255.255.0.0",
+				"trustedByPolicyBuilder": true
+			}
+		]
 	},
 	"modifications": [
 
