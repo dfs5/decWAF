@@ -20,6 +20,14 @@
 		"signature-settings": {
 			"signatureStaging": false
 		},
+		"signatures": [
+            {
+                "signatureId": 200101559,
+				"description": "src http: (Header)",
+                "enabled": true,
+                "performStaging": false
+            }
+        ],
 		"policy-builder": {
 			"learnOnlyFromNonBotTraffic": false
 		},
