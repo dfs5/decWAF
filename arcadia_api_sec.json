@@ -1,0 +1,35 @@
+{
+	"policy": {
+		"name": "policy-api-arcadia",
+		"description": "Arcadia API",
+		"template": {
+			"name": "POLICY_TEMPLATE_API_SECURITY"
+		},
+		"enforcementMode": "transparent",
+		"server-technologies": [
+			{
+				"serverTechnologyName": "MySQL"
+			},
+			{
+				"serverTechnologyName": "Unix/Linux"
+			},
+			{
+				"serverTechnologyName": "MongoDB"
+			}
+		],
+		"signature-settings": {
+			"signatureStaging": false
+		},
+		"policy-builder": {
+			"learnOnlyFromNonBotTraffic": false
+		},
+		"open-api-files": [
+            {
+            "link": "http://10.1.20.4/root/awaf_openapi/-/raw/master/App/openapi3-arcadia.yaml"
+            }
+	    ]
+	},
+	"modifications": [
+
+    ] 
+}
