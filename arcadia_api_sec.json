@@ -5,7 +5,7 @@
 		"template": {
 			"name": "POLICY_TEMPLATE_API_SECURITY"
 		},
-		"enforcementMode": "transparent",
+		"enforcementMode": "blocking",
 		"server-technologies": [
 			{
 				"serverTechnologyName": "MySQL"
@@ -30,7 +30,7 @@
 	    ],
 		"whitelist-ips": [
 			{
-				"ipAddress": "10.24.0.0",
+				"ipAddress": "10.25.0.0",
 				"ipMask": "255.255.0.0",
 				"trustedByPolicyBuilder": true
 			}
