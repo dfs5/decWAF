@@ -37,6 +37,16 @@
 		]
 	},
 	"modifications": [
-
+		{
+			"entityChanges": {
+				"allowedResponseCodes": [
+					404
+				]
+			},
+			"entity": {},
+			"entityType": "general",
+			"action": "update-append",
+			"description": "Add 404 to Allowed Response Codes."
+		}
     ] 
 }
