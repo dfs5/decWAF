@@ -47,6 +47,17 @@
 			"entityType": "general",
 			"action": "update-append",
 			"description": "Add 404 to Allowed Response Codes."
+		},
+		{
+			"entityChanges": {
+				"enabled": true
+			},
+			"entity": {
+				"description": "Directory traversals"
+			},
+			"entityType": "evasion",
+			"action": "add-or-update",
+			"description": "Enable Evasion Technique"
 		}
     ] 
 }
