@@ -24,10 +24,10 @@
 			"learnOnlyFromNonBotTraffic": false
 		},
 		"open-api-files": [
-            {
-            "link": "https://raw.githubusercontent.com/dfs5/decWAF/main/openapi3-arcadia.yaml"
-            }
-	    ]
+            		{
+            		"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/openapi3-arcadia.yaml"
+            		}
+	    	]
 	},
 	"modifications": [
 
