@@ -25,7 +25,7 @@
 		},
 		"open-api-files": [
             {
-            "link": "http://10.1.20.4/root/awaf_openapi/-/raw/master/App/openapi3-arcadia.yaml"
+            "link": "https://raw.githubusercontent.com/dfs5/decWAF/main/openapi3-arcadia.yaml"
             }
 	    ]
 	},
