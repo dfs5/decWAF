@@ -1,0 +1,47 @@
+{
+  "policy": {
+    "name": "sre05_devsec_dvwa2",
+    "description": "A basic, RDP policy v1.0",
+    "template": { "name": "POLICY_TEMPLATE_RAPID_DEPLOYMENT" },
+    "applicationLanguage": "utf-8",
+    "enforcementMode":"blocking",
+    "protocolIndependent": true,
+    "caseInsensitive": false,
+    "general": {
+      "trustXff": false
+    },
+    "signature-settings":{
+           "signatureStaging": false,
+           "minimumAccuracyForAutoAddedSignatures": "low"
+    },
+    "policy-builder": { "learningMode": "disabled" },
+    "signature-sets": [
+            {
+                "name": "SQL Injection Signatures",
+                "block": true,
+                "alarm": true
+            },
+            {
+                "name": "Cross Site Scripting Signatures",
+                "block": true,
+                "alarm": true
+            },
+            {
+                "name": "OS Command Injection Signatures",
+                "block": true,
+                "alarm": true
+            },
+            {
+                "name": "Command Execution Signatures",
+                "block": true,
+                "alarm": true
+            },
+            {
+                "name": "Predictable Resource Location Signatures",
+                "block": true,
+                "alarm": true
+            }
+    ]
+  }
+}
+                
