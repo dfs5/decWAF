@@ -5,7 +5,7 @@
 		"template": {
 			"name": "POLICY_TEMPLATE_API_SECURITY"
 		},
-		"enforcementMode": "blocking",
+		"enforcementMode": "transparent",
 		"server-technologies": [
 			{
 				"serverTechnologyName": "MySQL"
@@ -38,34 +38,13 @@
 	    ],
 		"whitelist-ips": [
 			{
-				"ipAddress": "10.25.0.0",
+				"ipAddress": "10.24.0.0",
 				"ipMask": "255.255.0.0",
 				"trustedByPolicyBuilder": true
 			}
 		]
 	},
 	"modifications": [
-		{
-			"entityChanges": {
-				"allowedResponseCodes": [
-					404
-				]
-			},
-			"entity": {},
-			"entityType": "general",
-			"action": "update-append",
-			"description": "Add 404 to Allowed Response Codes."
-		},
-		{
-			"entityChanges": {
-				"enabled": true
-			},
-			"entity": {
-				"description": "Directory traversals"
-			},
-			"entityType": "evasion",
-			"action": "add-or-update",
-			"description": "Enable Evasion Technique"
-		}
+
     ] 
 }
