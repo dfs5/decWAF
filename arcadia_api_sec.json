@@ -38,7 +38,7 @@
 	    ],
 		"whitelist-ips": [
 			{
-				"ipAddress": [ "10.24.0.0", "10.25.0.0" ], 
+				"ipAddress": "10.24.0.0", 
 				"ipMask": "255.255.0.0",
 				"trustedByPolicyBuilder": true
 			}
