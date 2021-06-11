@@ -22,7 +22,7 @@
 		},
 		"signatures": [
             {
-                "link": "https://raw.githubusercontent.com/dfs5/decWAF/main/signature_exeptions.json"
+                "link": "https://raw.githubusercontent.com/dfs5/decWAF/main/signature_exeptions.yaml"
             }
         ],
 		"policy-builder": {
