@@ -1,6 +1,6 @@
 {
   "policy": {
-    "name": "sre05_devsec_dvwa2",
+    "name": "sre05_devsec_2dvwa",
     "description": "A basic, RDP policy v1.0",
     "template": { "name": "POLICY_TEMPLATE_RAPID_DEPLOYMENT" },
     "applicationLanguage": "utf-8",
