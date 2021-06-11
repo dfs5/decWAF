@@ -1,0 +1,585 @@
+{
+	"info": {
+		"_postman_id": "7368397a-a193-409f-ad67-7f1070598d4e",
+		"name": "Declarative WAF",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1_Authenticate",
+			"item": [
+				{
+					"name": "Authenticate and Obtain Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"eval(postman.getGlobalVariable(\"_f5_workflow_functions\"));",
+									"",
+									"var populate_vars = [",
+									"        {name:\"bigip_token\", value:\"token.token\"}",
+									"    ];",
+									"    ",
+									"f5_populate_env_vars(populate_vars);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{bigip_username}}\",\n  \"password\": \"{{bigip_password}}\",\n  \"loginProvidername\":\"tmos\"\n}\n"
+						},
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Perform authentication and populate the variable specified in the {{bigip_token_var}} variable."
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Authentication Works",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"eval(postman.getGlobalVariable(\"_f5_workflow_functions\"));",
+									"",
+									"var check_vals = [",
+									"        {path:\"token\", value:environment.bigip_token}",
+									"    ];",
+									"    ",
+									"f5_check_response(check_vals);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/shared/authz/tokens/{{bigip_token}}",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{bigip_token}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Authentication Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"eval(postman.getGlobalVariable(\"_f5_workflow_functions\"));",
+									"",
+									"var check_vals = [",
+									"        {path:\"timeout\", value:environment.bigip_token_timeout}",
+									"    ];",
+									"    ",
+									"f5_check_response(check_vals);",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"if(typeof environment.bigip_token_timeout === 'undefined') {",
+									"    postman.setEnvironmentVariable('bigip_token_timeout', 1200);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"{{bigip_token_timeout}}\"\n}"
+						},
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/shared/authz/tokens/{{bigip_token}}",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{bigip_token}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Authenticate to a BIG-IP device.\n\nInput Variables:\nbigip_mgmt\t\t\tBIG-IP management address\nbigip_username\t\tUsername\nbigip_password\t\tPassword\nbigip_token_timeout\t[OPTIONAL] Timeout for the auth token\n\nOutput Variables:\nbigip_token\t\t\tAuthentication token"
+		},
+		{
+			"name": "2_Deploy policy",
+			"item": [
+				{
+					"name": "List Policies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/tm/asm/policies?$select=name,id",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"asm",
+								"policies"
+							],
+							"query": [
+								{
+									"key": "$select",
+									"value": "name,id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Import Policy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fileReference\":{\n        \"link\": \"{{link_to_policy}}\"\n    },\n    \"policy\":{\n        \"fullPath\":\"/Common/policy\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/tm/asm/tasks/import-policy",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"asm",
+								"tasks",
+								"import-policy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Policy Import",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/tm/asm/tasks/import-policy/",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"asm",
+								"tasks",
+								"import-policy",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply Imported Policy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"policy\":{\n        \"fullPath\":\"/Common/sre_devsec_01\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/tm/asm/tasks/apply-policy",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"asm",
+								"tasks",
+								"apply-policy"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3_Deploy application",
+			"item": [
+				{
+					"name": "dvwa common policy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"class\": \"AS3\",\r\n        \"action\": \"deploy\",\r\n        \"persist\": true,\r\n        \"declaration\": {\r\n            \"class\": \"ADC\",\r\n            \"schemaVersion\": \"3.16.0\",\r\n            \"label\": \"WAF policy sample\",\r\n            \"remark\": \"Deploay dvwa app and attached existing ASM policy\",\r\n            \"sre05-devsec\": {\r\n                \"class\": \"Tenant\",\r\n                \"dvwa\": {\r\n                    \"class\": \"Application\",\r\n                    \"template\": \"generic\",\r\n                    \"dvwa_vip\": {\r\n                        \"class\": \"Service_HTTPS\",\r\n                        \"virtualAddresses\": [\r\n                            \"10.24.1.35\"\r\n                        ],\r\n                        \"serverTLS\": { \"bigip\": \"/Common/dfs5.net_clientssl\" },\r\n                        \"pool\": \"dvwa_pool\",\r\n                        \"policyWAF\": { \"bigip\": \"/Common/{{policy_name}}\" },\r\n                \t    \"securityLogProfiles\": [\r\n                            {\"bigip\": \"/Common/ELK_log\"},\r\n                            {\"bigip\": \"/Common/Log all requests\"}\r\n                        ]\r\n                    },\r\n                    \"dvwa_pool\": {\r\n                        \"class\": \"Pool\",\r\n                        \"monitors\": [\r\n                            {\r\n                            \"use\": \"test_monitor\"\r\n                            }\r\n                        ],\r\n                        \"members\": [\r\n                            {\r\n                                \"servicePort\": 30010,\r\n                                \"serverAddresses\": [\"10.24.4.11\", \"10.24.4.12\", \"10.24.4.13\"],\r\n                                \"shareNodes\": true\r\n                            }\r\n                        ]\r\n                    },\r\n                    \"test_monitor\": {\r\n                        \"class\": \"Monitor\",\r\n                        \"label\": \"test_monitor\",\r\n                        \"monitorType\": \"http\",\r\n                        \"interval\": 30,\r\n                        \"timeout\": 91,\r\n                        \"send\": \"GET /login.php\\r\\n\",\r\n                        \"receive\": \"Username\"\r\n                    }\r\n                },\r\n                \"dvwa2\": {\r\n                    \"class\": \"Application\",\r\n                    \"template\": \"generic\",\r\n                    \"dvwa2_vip\": {\r\n                        \"class\": \"Service_HTTPS\",\r\n                        \"virtualAddresses\": [\r\n                            \"10.24.1.36\"\r\n                        ],\r\n                        \"serverTLS\": { \"bigip\": \"/Common/dfs5.net_clientssl\" },\r\n                        \"pool\": \"dvwa2_pool\",\r\n                        \"policyWAF\": { \"bigip\": \"/Common/{{policy2_name}}\" },\r\n                \t    \"securityLogProfiles\": [\r\n                \t\t    {\"bigip\": \"/Common/ELK_log\"},\r\n                            {\"bigip\": \"/Common/Log illegal requests\"}\r\n                \t\t]\r\n                    },\r\n                    \"dvwa2_pool\": {\r\n                        \"class\": \"Pool\",\r\n                        \"monitors\": [\r\n                            {\r\n                            \"use\": \"test_monitor\"\r\n                            }\r\n                        ],\r\n                        \"members\": [\r\n                            {\r\n                                \"servicePort\": 30011,\r\n                                \"serverAddresses\": [\"10.24.4.11\", \"10.24.4.12\", \"10.24.4.13\"],\r\n                                \"shareNodes\": true\r\n                            }\r\n                        ]\r\n                    },\r\n                    \"test_monitor\": {\r\n                        \"class\": \"Monitor\",\r\n                        \"label\": \"test_monitor\",\r\n                        \"monitorType\": \"http\",\r\n                        \"interval\": 30,\r\n                        \"timeout\": 91,\r\n                        \"send\": \"GET /login.php\\r\\n\",\r\n                        \"receive\": \"Username\"\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/shared/appsvcs/declare",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"appsvcs",
+								"declare"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "arcadia api sec pol",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"class\": \"AS3\",\r\n        \"action\": \"deploy\",\r\n        \"persist\": true,\r\n        \"declaration\": {\r\n            \"class\": \"ADC\",\r\n            \"schemaVersion\": \"3.16.0\",\r\n            \"label\": \"openAPI sample\",\r\n            \"remark\": \"Deploy arcadia app with openAPI based policy\",\r\n            \"arcadia_team\": {\r\n                \"class\": \"Tenant\",\r\n                \"arcadia\": {\r\n                    \"class\": \"Application\",\r\n                    \"template\": \"generic\",\r\n                    \"arcadia_vip\": {\r\n                        \"class\": \"Service_HTTPS\",\r\n                        \"virtualAddresses\": [\r\n                            \"10.24.1.37\"\r\n                        ],\r\n                        \"serverTLS\": { \"bigip\": \"/Common/dfs5.net_clientssl\" },\r\n                        \"pool\": \"arcadia_pool\",\r\n                        \"policyWAF\": { \"use\": \"arcadia_api\" },\r\n                \t    \"securityLogProfiles\": [\r\n                            {\"bigip\": \"/Common/ELK_log\"},\r\n                            {\"bigip\": \"/Common/Log illegal requests\"}\r\n                        ]\r\n                    },\r\n                    \"arcadia_api\": {\r\n                        \"class\": \"WAF_Policy\",\r\n                        \"url\": \"https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_api_sec.json\",\r\n                        \"ignoreChanges\": false\r\n                    },\r\n                    \"arcadia_pool\": {\r\n                        \"class\": \"Pool\",\r\n                        \"monitors\": [\r\n                            {\r\n                            \"use\": \"arcadia_monitor\"\r\n                            }\r\n                        ],\r\n                        \"members\": [\r\n                            {\r\n                                \"servicePort\": 30001,\r\n                                \"serverAddresses\": [\"10.24.4.11\", \"10.24.4.12\", \"10.24.4.13\"],\r\n                                \"shareNodes\": true\r\n                            }\r\n                        ]\r\n                    },\r\n                    \"arcadia_monitor\": {\r\n                        \"class\": \"Monitor\",\r\n                        \"label\": \"test_monitor\",\r\n                        \"monitorType\": \"http\",\r\n                        \"interval\": 30,\r\n                        \"timeout\": 91,\r\n                        \"send\": \"GET /trading/login.php HTTP/1.1\\r\\nHost: arcadia.dfs5.net\\r\\nConnection: Close\\r\\n\\r\\n\",\r\n                        \"receive\": \"Username\"\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/shared/appsvcs/declare",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"appsvcs",
+								"declare"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4_Deploy learning suggestions",
+			"item": [
+				{
+					"name": "Select policy for export",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"suggestionId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"policyReference\": {\n\t\t\"link\": \"https://localhost/mgmt/tm/asm/policies/{{policy_key}}\"},\n    \"inline\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/tm/asm/tasks/export-suggestions",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"asm",
+								"tasks",
+								"export-suggestions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export suggestions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"suggestionId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"policyReference\": {\n\t\t\"link\": \"https://localhost/mgmt/tm/asm/policies/{{policy_key}}\"},\n    \"inline\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/tm/asm/tasks/export-suggestions",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"asm",
+								"tasks",
+								"export-suggestions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5_delete",
+			"item": [
+				{
+					"name": "Delete all tenats/partitions!!!",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/shared/appsvcs/declare",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"appsvcs",
+								"declare"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete particular tenat",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/shared/appsvcs/declare/{{tenant_name}}",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"appsvcs",
+								"declare",
+								"{{tenant_name}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

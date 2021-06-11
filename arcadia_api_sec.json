@@ -22,8 +22,17 @@
 		},
 		"signatures": [
             {
-                "link": "https://raw.githubusercontent.com/dfs5/decWAF/main/signature_exeptions.yaml"
-            }
+				"signatureId": 200101559,
+				"description": "src http: (Header)",
+				"enabled": false,
+				"performStaging": false
+			},
+			{
+				"signatureId": 200101558,
+				"description": "src http: (Parameter)",
+				"enabled": false,
+				"performStaging": false
+			}
         ],
 		"policy-builder": {
 			"learnOnlyFromNonBotTraffic": false
