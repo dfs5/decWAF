@@ -5,7 +5,7 @@
 		"template": {
 			"name": "POLICY_TEMPLATE_API_SECURITY"
 		},
-		"enforcementMode": "transparent",
+		"enforcementMode": "blocking",
 		"server-technologies": [
 			{
 				"serverTechnologyName": "MySQL"
