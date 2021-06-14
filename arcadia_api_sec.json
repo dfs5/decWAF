@@ -20,7 +20,7 @@
 		"signature-settings": {
 			"signatureStaging": false
 		},
-		"signatureReference": [{
+		"signaturesReference": [{
 			"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/signatures.txt"
 		}],
 		"policy-builder": {
