@@ -9,7 +9,7 @@
 		"enforcementMode": "transparent",
 		"open-api-files": [
             {
-            	"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/arcadia_policy/openAPI/openapi3-arcadia.yaml"
+            	"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/openAPI/openapi3-arcadia.yaml"
             }
 	    ],
 		"policy-builder": {
@@ -19,19 +19,19 @@
 			"signatureStaging": false
 		},
 		"serverTechnologyReference": {
-            "link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/arcadia_policy/WAFpolicy/signatures/server-technologies.json"
+            "link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/signatures/server-technologies.json"
         },
 		"signatureSetReference": {
-            "link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/arcadia_policy/WAFpolicy/signatures/signature-sets.json"
+            "link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/signatures/signature-sets.json"
         },
 		"responsePageReference": {
-			"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/arcadia_policy/WAFpolicy/response-pages/response-pages.json"
+			"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/response-pages/response-pages.json"
 		},
 		 "methodReference": {
-			"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/arcadia_policy/WAFpolicy/compliance/methods.json"
+			"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/compliance/methods.json"
 		},
 		"filetypeReference": {
-			"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/arcadia_policy/WAFpolicy/filetype/filetypes.json"
+			"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/filetype/filetypes.json"
 		},
 		"blocking-settings": {
 			"violations": [],
@@ -49,10 +49,10 @@
 			]
 		},
 		"whitelistIpReference": {
-		   "link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/arcadia_policy/WAFpolicy/ip-exceptions/whitelist-ips.json"
+		   "link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/ip-exceptions/whitelist-ips.json"
 		}
 	},
 	"modificationsReference": {
-			"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/arcadia_policy/WAFpolicy/_modifications/modifications.json"
+			"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/_modifications/modifications.json"
 	}
 }
