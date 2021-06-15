@@ -1,0 +1,7 @@
+[
+    {
+        "name": "Generic Detection Signatures",
+        "block": false,
+        "alarm": true
+    }
+]

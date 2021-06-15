@@ -1,0 +1,6 @@
+[
+    {
+        "name": "PUT",
+        "$action": "delete"
+    }
+]

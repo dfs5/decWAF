@@ -1,0 +1,6 @@
+[
+    {
+        "description": "Host header contains IP address",
+        "enabled": true
+    }
+]

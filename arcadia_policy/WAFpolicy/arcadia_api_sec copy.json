@@ -1,0 +1,67 @@
+{
+	"$schema" : "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/waf16schema.json",
+	"policy": {
+		"name": "policy-api-arcadia",
+		"description": "Arcadia API",
+		"template": {
+			"name": "POLICY_TEMPLATE_API_SECURITY"
+		},
+		"enforcementMode": "transparent",
+		"open-api-files": [
+            {
+            	"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/openAPI/openapi3-arcadia.yaml"
+            }
+	    ],
+		"policy-builder": {
+			"learnOnlyFromNonBotTraffic": false
+		},
+		"signature-settings": {
+			"signatureStaging": false
+		},
+		"serverTechnologyReference": {
+            "link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/WAFpolicy/signatures/server-technologies.json"
+        },
+		"signatureSetReference": {
+            "link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/WAFpolicy/signatures/signature-sets.json"
+        },
+		"responsePageReference": {
+			"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/WAFpolicy/response-pages/response-pages.json"
+		},
+		 "methodReference": {
+			"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/WAFpolicy/compliance/methods.json"
+		},
+		"filetypeReference": {
+			"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/WAFpolicy/filetype/filetypes.json"
+		},
+		"blocking-settings": {
+			"violations": [],
+			"http-protocols": [
+				{
+					"description": "Host header contains IP address",
+					"enabled": true
+				}
+			],
+			"evasions": [
+				{
+					"description": "Directory traversals",
+					"enabled": true
+				}
+			],
+			"httpProtocolReference": {
+				"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/WAFpolicy/compliance/http-protocols.json"
+			},
+			"evasionReference": {
+				"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/WAFpolicy/compliance/evasions.json"
+			}
+		},
+		"botDefenseReference": {
+            "link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/WAFpolicy/automation-attacks/bot-defense.json"
+		},
+		"whitelistIpReference": {
+		   "link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/WAFpolicy/ip-exceptions/whitelist-ips.json"
+		}
+	},
+	"modificationsReference": {
+			"link": "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/WAFpolicy/_modifications/modifications.json"
+	}
+}
