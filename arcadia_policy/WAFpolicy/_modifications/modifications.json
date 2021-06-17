@@ -19,6 +19,384 @@
         },
         "entityType": "signature",
         "action": "add-or-update"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/side_bar_upload.php",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "allowedResponseCodes": [
+                404
+            ]
+        },
+        "entity": {},
+        "entityType": "general",
+        "action": "update-append",
+        "description": "Add 404 to Allowed Response Codes."
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/rest/portfolio.php",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "wildcard",
+            "wildcardOrder": -2
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "*.[Gg][Ii][Ff]",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add/Update Wildcard HTTP URL. Set Wildcard Order to Last before wildcard URL(s) '*'."
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/js/main.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "wildcard",
+            "wildcardOrder": -2
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "*.[Jj][Pp][Gg]",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add/Update Wildcard HTTP URL. Set Wildcard Order to Last before wildcard URL(s) '*'."
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/js/plugins/countdown/jquery.downCount.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/js/demo_customizer.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/bootstrap/js/dist/tab.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/bootstrap/js/dist/modal.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/bootstrap/js/dist/collapse.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/bootstrap/js/dist/alert.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/bootstrap/js/dist/button.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/dropzone/dist/dropzone.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/bootstrap/js/dist/util.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/bootstrap-daterangepicker/daterangepicker.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/chart.js/dist/Chart.min.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/jquery/dist/jquery.min.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/bootstrap-validator/dist/validator.min.js",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/icon_fonts_assets/picons-thin/style.css",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/css/additional.css",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/bootstrap-daterangepicker/daterangepicker.css",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/index.php",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/auth.php",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "wildcard",
+            "wildcardOrder": -2
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "*.[Pp][Nn][Gg]",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add/Update Wildcard HTTP URL. Set Wildcard Order to Last before wildcard URL(s) '*'."
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/css/main.css",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
+    },
+    {
+        "entityChanges": {
+            "type": "explicit"
+        },
+        "entity": {
+            "protocol": "http",
+            "name": "/trading/login.php",
+            "method": "*"
+        },
+        "entityType": "url",
+        "action": "add-or-update",
+        "description": "Add HTTP URL"
     }
 ]
 }

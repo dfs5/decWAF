@@ -1,5 +1,10 @@
 # decWAF
 
+This lab is based on [the guidance for NGINX daclarative NAP configuration](https://github.com/MattDierick/Nginx-App-Protect-Policy/tree/master/policies).
+
+The policy structure used is only an example and can be modyfied to meet your team's responsibilities.
+![](http://gitlab.dfslab.local/fod/decwaf/-/raw/f66a316fa0cb6f07f3bd47caec68f5cce79a28d5/images/Screenshot_2021-06-16_at_17.28.42.png) 
+
 This setup requires BIG-IP release 16.x and the [latest AS3 RPM](https://github.com/F5Networks/f5-appsvcs-extension/releases) package.
 
 Usefull links:
@@ -43,7 +48,7 @@ e.g.:
         },
 
 - Copy and paste this id into the {{policy_id}} variable and run the call. 
-- Next run 'Export Suggestions' to get the suggestions listed in json format. 
+- Next run 'Export Suggestions' to get the suggestions listed in json format. If you want to filter on suggestions that have reached a specific level (e.g. >90%) run the 'Filter suggestions for export' POST call and set the score level to match your requirements (e.g.: "filter": "score gt 90")
 - Now you can copy&paste them into the main policy declaration 'arcadia_api_sec.json' under the 'modifications' section. 
 - Finaly re-apply the entire 'arcadia api sec pol' declaration to apply the learning suggestions to the policy. You can varify the modifications in the BIG-IP UI.
 
@@ -57,19 +62,29 @@ In order to speed up the learning process adjust the whitelist section n the 'ar
 			}
 		]
 
-If you want to disable signatures generating false positives modify the signature section in the 'arcadia_api_sec.json' policy. 
+If you want to disable signatures generating false positives you can use the modification section of the 'arcadia_api_sec.json' policy. 
 
-        "signatures": [
+        {
+        "modifications": [
             {
-                "signatureId": 200101559,
-                "description": "src http: (Header)",
-                "enabled": false,
-                "performStaging": false
+                "entityChanges": {
+                    "enabled": false
+                },
+                "entity": {
+                    "signatureId": 200001834
+                },
+                "entityType": "signature",
+                "action": "add-or-update"
             },
             {
-                "signatureId": 200101558,
-                "description": "src http: (Parameter)",
-                "enabled": false,
-                "performStaging": false
+                "entityChanges": {
+                    "enabled": false
+                },
+                "entity": {
+                    "signatureId": 200004461
+                },
+                "entityType": "signature",
+                "action": "add-or-update"
             }
-        ],
+        ]
+        }

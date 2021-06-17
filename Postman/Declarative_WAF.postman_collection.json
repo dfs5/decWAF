@@ -404,7 +404,137 @@
 			]
 		},
 		{
-			"name": "4_Deploy learning suggestions",
+			"name": "4a_Run legit traffic",
+			"item": [
+				{
+					"name": "buy stocks",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"trans_value\":12,\r\n\t\"qty\":16,\r\n\t\"company\":\"MSFT\",\r\n\t\"action\":\"buy\",\r\n\t\"stock_price\":198\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{vs_arcadia}}/trading/rest/buy_stocks.php",
+							"protocol": "https",
+							"host": [
+								"{{vs_arcadia}}"
+							],
+							"path": [
+								"trading",
+								"rest",
+								"buy_stocks.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sell stocks",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"trans_value\":212,\r\n\t\"qty\":16,\r\n\t\"company\":\"MSFT\",\r\n\t\"action\":\"sell\",\r\n\t\"stock_price\":158\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{vs_arcadia}}/trading/rest/sell_stocks.php",
+							"protocol": "https",
+							"host": [
+								"{{vs_arcadia}}"
+							],
+							"path": [
+								"trading",
+								"rest",
+								"sell_stocks.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "last transactions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{vs_arcadia}}/trading/transactions.php",
+							"protocol": "https",
+							"host": [
+								"{{vs_arcadia}}"
+							],
+							"path": [
+								"trading",
+								"transactions.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4b_Deploy learning suggestions",
 			"item": [
 				{
 					"name": "Select policy for export",
@@ -438,6 +568,61 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"policyReference\": {\n\t\t\"link\": \"https://localhost/mgmt/tm/asm/policies/{{policy_key}}\"},\n    \"inline\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{bigip_mgmt}}/mgmt/tm/asm/tasks/export-suggestions",
+							"protocol": "https",
+							"host": [
+								"{{bigip_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"asm",
+								"tasks",
+								"export-suggestions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter suggestions for export",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"suggestionId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{bigip_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"inline\": \"true\",\n    \"policyReference\": {\n        \"link\": \"https://localhost/mgmt/tm/asm/policies/{{policy_key}}\"\n    },\n    \"filter\": \"score gt 90\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -1,5 +1,5 @@
 {
-	"$schema" : "http://gitlab.dfslab.local/fod/decwaf/-/raw/master/waf16schema.json",
+	"$schema" : "https://raw.githubusercontent.com/dfs5/decWAF/main/waf16schema.json",
 	"policy": {
 		"name": "policy-api-arcadia",
 		"description": "Arcadia API",
