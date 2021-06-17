@@ -3,7 +3,7 @@
 This lab is based on [the guidance for NGINX daclarative NAP configuration](https://github.com/MattDierick/Nginx-App-Protect-Policy/tree/master/policies).
 
 The policy structure used is only an example and can be modyfied to meet your team's responsibilities.
-![source](https://github.com/dfs5/decWAF/blob/3c451d4c3e85781422237060f5338a5c37119a98/images/Screenshot_2021-06-16_at_17.28.42.png) 
+![](https://github.com/dfs5/decWAF/blob/3c451d4c3e85781422237060f5338a5c37119a98/images/Screenshot_2021-06-16_at_17.28.42.png) 
 
 This setup requires BIG-IP release 16.x and the [latest AS3 RPM](https://github.com/F5Networks/f5-appsvcs-extension/releases) package.
 
