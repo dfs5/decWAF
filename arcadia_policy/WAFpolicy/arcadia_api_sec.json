@@ -1,5 +1,5 @@
 {
-	"$schema" : "https://raw.githubusercontent.com/dfs5/decWAF/main/waf16schema.json",
+	"$schema" : "http://raw.githubusercontent.com/dfs5/decWAF/main/waf16schema.json",
 	"policy": {
 		"name": "policy-api-arcadia",
 		"description": "Arcadia API",
@@ -9,7 +9,7 @@
 		"enforcementMode": "transparent",
 		"open-api-files": [
             {
-            	"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/openAPI/openapi3-arcadia.yaml"
+            	"link": "http://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/openAPI/openapi3-arcadia.yaml"
             }
 	    ],
 		"policy-builder": {
@@ -19,10 +19,10 @@
 			"signatureStaging": false
 		},
 		"serverTechnologyReference": {
-            "link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/signatures/server-technologies.json"
+            "link": "http://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/signatures/server-technologies.json"
         },
 		"signatureSetReference": {
-            "link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/signatures/signature-sets.json"
+            "link": "http://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/signatures/signature-sets.json"
         },
 		"responsePageReference": {
 			"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/response-pages/response-pages.json"
@@ -49,10 +49,10 @@
 			]
 		},
 		"whitelistIpReference": {
-		   "link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/ip-exceptions/whitelist-ips.json"
+		   "link": "http://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/ip-exceptions/whitelist-ips.json"
 		}
 	},
 	"modificationsReference": {
-			"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/_modifications/modifications.json"
+			"link": "http://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/_modifications/modifications.json"
 	}
 }
