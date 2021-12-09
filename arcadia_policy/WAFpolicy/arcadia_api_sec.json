@@ -25,13 +25,13 @@
             "link": "http://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/signatures/signature-sets.json"
         },
 		"responsePageReference": {
-			"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/response-pages/response-pages.json"
+			"link": "http://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/response-pages/response-pages.json"
 		},
 		 "methodReference": {
-			"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/compliance/methods.json"
+			"link": "http://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/compliance/methods.json"
 		},
 		"filetypeReference": {
-			"link": "https://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/filetype/filetypes.json"
+			"link": "http://raw.githubusercontent.com/dfs5/decWAF/main/arcadia_policy/WAFpolicy/filetype/filetypes.json"
 		},
 		"blocking-settings": {
 			"violations": [],
